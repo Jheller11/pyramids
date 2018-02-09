@@ -15,7 +15,12 @@ body {
     margin: 20px auto;
     padding: 5px;
 }
-
+.column {
+    width: 30%;
+    border: 1px black solid;
+    height: 95%;
+    margin: auto;
+}
 .instructions {
     height: 100px;
     width: 90%;
