@@ -1,0 +1,28 @@
+body {
+    height: 100%;
+    width: 800px;
+    margin: 10px auto;
+    background-color: sandybrown; 
+    border: solid brown 2px;
+}
+
+.gamecontainer {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    border: 1px solid brown;
+    margin: 20px auto;
+    padding: 5px;
+}
+
+.instructions {
+    height: 100px;
+    width: 90%;
+    color: rgb(4, 0, 253);
+    text-align: center;
+    padding: 5px;
+    border: 1px solid brown;
+    margin: 20px auto;
+}
+
