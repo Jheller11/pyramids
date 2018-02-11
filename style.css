@@ -46,6 +46,10 @@ body {
     background-image: url("images/dark-brick-wall.png");
 }
 
+.block:hover {
+    border: 5px dotted red;
+}
+
 .block1 {
     width: 50px;
  
