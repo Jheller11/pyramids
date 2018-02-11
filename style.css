@@ -14,13 +14,21 @@ body {
     border: 1px solid brown;
     margin: 20px auto;
     padding: 5px;
+    /* background-image: url("images/desert2.jpeg"); */
+    
+    
 }
 .column {
-    width: 30%;
+    width: 250px;
     border: 1px black solid;
     height: 95%;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
 }
+
 .instructions {
     height: 100px;
     width: 90%;
@@ -31,3 +39,34 @@ body {
     margin: 20px auto;
 }
 
+.block {
+    height: 20%;
+    background-color: rgb(204,163,0);
+    border: 1px solid black;
+    background-image: url("images/dark-brick-wall.png");
+}
+
+.block1 {
+    width: 50px;
+ 
+}
+
+.block2 {
+    width: 100px;
+
+}
+
+.block3 {
+    width: 150px;
+
+}
+
+.block4 {
+    width: 200px;
+
+}
+
+.block5 {
+    width: 250px;
+
+}
