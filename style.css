@@ -2,37 +2,44 @@ body {
     height: 100%;
     width: 800px;
     margin: 10px auto;
-    background-color: sandybrown; 
-    border: solid brown 2px;
+    background: burlywood;
+    background: url("images/desert2.jpeg");
+    background-size: cover;
+}
+
+header {
+    margin: 5px;
+    text-align: center;
+}
+
+.counter {
+    height: 50px;
+    width: 100px;
 }
 
 .gamecontainer {
     height: 400px;
     display: flex;
     justify-content: center;
-    width: 90%;
-    border: 1px solid brown;
+    width: 95%;
     margin: 20px auto;
-    padding: 5px;
-    /* background-image: url("images/desert2.jpeg"); */
-    
-    
+    padding: 5px;  
 }
 .column {
     width: 250px;
-    border: 1px black solid;
-    height: 95%;
+    height: 100%;
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    border: 1px dashed green;
 }
 
 .instructions {
     height: 100px;
     width: 90%;
-    color: rgb(4, 0, 253);
+    color: white;
     text-align: center;
     padding: 5px;
     border: 1px solid brown;
@@ -40,37 +47,32 @@ body {
 }
 
 .block {
-    height: 20%;
+    height: 18%;
     background-color: rgb(204,163,0);
     border: 1px solid black;
     background-image: url("images/dark-brick-wall.png");
 }
 
 .column:hover {
-    border: 5px dotted red;
+    border: 1px dashed red;
 }
 
 .block1 {
     width: 50px;
- 
 }
 
 .block2 {
     width: 100px;
-
 }
 
 .block3 {
     width: 150px;
-
 }
 
 .block4 {
     width: 200px;
-
 }
 
 .block5 {
     width: 250px;
-
 }

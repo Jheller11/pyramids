@@ -1,15 +1,14 @@
 class Block {
-  constructor (name, position, size) {
+  constructor (name, size) {
     this.name = name
-    this.position = position
     this.size = size
   }
 }
-const block1 = new Block('block1', 1, 1)
-const block2 = new Block('block2', 1, 2)
-const block3 = new Block('block3', 1, 3)
-const block4 = new Block('block4', 1, 4)
-const block5 = new Block('block5', 1, 5)
+const block1 = new Block('block1', 1)
+const block2 = new Block('block2', 2)
+const block3 = new Block('block3', 3)
+const block4 = new Block('block4', 4)
+const block5 = new Block('block5', 5)
 
 const game = {
   column1Array: [block1, block2, block3, block4, block5],
@@ -19,31 +18,17 @@ const game = {
 var activeBlock = 'test'
 var toColumn = 'test'
 var fromColumn = 'test'
-
+var totalMoves = -1
+const counter = document.querySelector('.counter')
 const column1div = document.querySelector('#columnone')
 const column2div = document.querySelector('#columntwo')
 const column3div = document.querySelector('#columnthree')
-
-// checked - successfully creates 5 new divs
-function createGame () {
-  for (i = 0; i < game.column1Array.length; i++) {
-    var newBlock = document.createElement('div')
-    column1div.appendChild(newBlock)
-    newBlock.classList = ('block ' + game.column1Array[i].name)
-  }
-}
-createGame()
-move()
-
-const block1div = document.querySelector('.block1')
-const block2div = document.querySelector('.block2')
-const block3div = document.querySelector('.block3')
-const block4div = document.querySelector('.block4')
-const block5div = document.querySelector('.block5')
-
+// starts the chain of functions to establish columns and block to move
 function move () {
   fromListeners()
 }
+//the following two functions add listeners for establish *from*
+// and *to* columns
 function fromListeners () {
   column1div.addEventListener('click', column1)
   column2div.addEventListener('click', column2)
@@ -54,13 +39,12 @@ function toListeners () {
   column2div.addEventListener('click', tocolumn2)
   column3div.addEventListener('click', tocolumn3)
 }
-function checkWin () {
-  if (column3div.childNodes.length === 5) {
-    return true
-  }
-}
-
+//update Columns function calls the following four functions.  All divs in user view
+//are deleted and then all columns are updated to reflect the block objects in their
+//respoective arrays
 function updateColumns () {
+  totalMoves += 1
+  counter.innerHTML = 'Total Moves: ' + totalMoves
   deletedivs()
   updateColumn1()
   updateColumn2()
@@ -98,7 +82,7 @@ function deletedivs () {
     column3div.removeChild(column3div.firstChild)
   }
 }
-
+// remove listeners after each move selection
 function removeListeners () {
   column1div.removeEventListener('click', column1)
   column2div.removeEventListener('click', column2)
@@ -107,7 +91,8 @@ function removeListeners () {
   column2div.removeEventListener('click', tocolumn2)
   column3div.removeEventListener('click', tocolumn3)
 }
-
+// the following three functions run when a column is clicked
+//these establish the *from* column
 function column1 () {
   if (game.column1Array[0]) {
     removeListeners()
@@ -138,6 +123,8 @@ function column3 () {
     move()
   }
 }
+// the following three functions run when a column is clocked
+// these establish the *to* column
 function tocolumn1 () {
   removeListeners()
   toColumn = game.column1Array
@@ -153,6 +140,14 @@ function tocolumn3 () {
   toColumn = game.column3Array
   pushToColumn()
 }
+//check validity of move
+function checkWin () {
+  if (column3div.childNodes.length === 5) {
+    return true
+  }
+}
+//moves the top block from *from* column to *to* column after check
+// for validity of move
 function pushToColumn () {
   if (toColumn[0]) {
     if (activeBlock.size < toColumn[0].size) {
@@ -164,16 +159,15 @@ function pushToColumn () {
       }
       move()
     } else {
-      alert('invalid move')
+      alert('Move not possible.  Please try again')
       move()
     }
   } else {
     toColumn.unshift(activeBlock)
     fromColumn.splice(0, 1)
     updateColumns()
-    if (checkWin() === true) {
-      alert('You won')
-    }
     move()
   }
 }
+updateColumns()
+move()
