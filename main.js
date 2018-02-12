@@ -31,7 +31,6 @@ function createGame () {
     column1div.appendChild(newBlock)
     newBlock.classList = ('block ' + game.column1Array[i].name)
   }
-  console.log('createGame working')
 }
 createGame()
 move()
@@ -45,22 +44,16 @@ const block5div = document.querySelector('.block5')
 function move () {
   fromListeners()
 }
-
 function fromListeners () {
   column1div.addEventListener('click', column1)
   column2div.addEventListener('click', column2)
   column3div.addEventListener('click', column3)
-  console.log('from listeners added')
 }
-
 function toListeners () {
   column1div.addEventListener('click', tocolumn1)
   column2div.addEventListener('click', tocolumn2)
   column3div.addEventListener('click', tocolumn3)
-  console.log('to listeners added')
 }
-
-// win condition function to be called at end of  moveBlock
 function checkWin () {
   if (column3div.childNodes.length === 5) {
     return true
@@ -72,7 +65,6 @@ function updateColumns () {
   updateColumn1()
   updateColumn2()
   updateColumn3()
-  console.log('columns update')
 }
 function updateColumn1 () {
   for (i = 0; i < game.column1Array.length; i++) {
@@ -117,40 +109,46 @@ function removeListeners () {
 }
 
 function column1 () {
-  console.log('column1')
-  removeListeners()
-  activeBlock = game.column1Array[0]
-  fromColumn = game.column1Array
-  toListeners()
+  if (game.column1Array[0]) {
+    removeListeners()
+    activeBlock = game.column1Array[0]
+    fromColumn = game.column1Array
+    toListeners()
+  } else {
+    move()
+  }
 }
 function column2 () {
-  console.log('column2')
-  removeListeners()
-  activeBlock = game.column2Array[0]
-  fromColumn = game.column2Array
-  toListeners()
+  if (game.column2Array[0]) {
+    removeListeners()
+    activeBlock = game.column2Array[0]
+    fromColumn = game.column2Array
+    toListeners()
+  } else {
+    move()
+  }
 }
 function column3 () {
-  console.log('column3')
-  removeListeners()
-  activeBlock = game.column3Array[0]
-  fromColumn = game.column3Array
-  toListeners()
+  if (game.column3Array[0]) {
+    removeListeners()
+    activeBlock = game.column3Array[0]
+    fromColumn = game.column3Array
+    toListeners()
+  } else {
+    move()
+  }
 }
 function tocolumn1 () {
-  console.log('column1')
   removeListeners()
   toColumn = game.column1Array
   pushToColumn()
 }
 function tocolumn2 () {
-  console.log('column2')
   removeListeners()
   toColumn = game.column2Array
   pushToColumn()
 }
 function tocolumn3 () {
-  console.log('column2')
   removeListeners()
   toColumn = game.column3Array
   pushToColumn()
@@ -158,24 +156,24 @@ function tocolumn3 () {
 function pushToColumn () {
   if (toColumn[0]) {
     if (activeBlock.size < toColumn[0].size) {
-  toColumn.unshift(activeBlock)
-  fromColumn.splice(0, 1)
-  updateColumns()
-  if (checkWin() === true) {
-    alert('You won')
+      toColumn.unshift(activeBlock)
+      fromColumn.splice(0, 1)
+      updateColumns()
+      if (checkWin() === true) {
+        alert('You won')
+      }
+      move()
+    } else {
+      alert('invalid move')
+      move()
+    }
+  } else {
+    toColumn.unshift(activeBlock)
+    fromColumn.splice(0, 1)
+    updateColumns()
+    if (checkWin() === true) {
+      alert('You won')
+    }
+    move()
   }
-  move()
-} else {
-  alert('invalid move')
-  move()
-}
-} else {
-  toColumn.unshift(activeBlock)
-  fromColumn.splice(0, 1)
-  updateColumns()
-  if (checkWin() === true) {
-    alert('You won')
-  }
-  move()
-}
 }
