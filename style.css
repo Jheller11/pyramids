@@ -8,8 +8,9 @@ body {
 }
 
 header {
-    margin: 5px;
+    padding: 20px;
     text-align: center;
+    color: white
 }
 
 .counter {
@@ -34,16 +35,6 @@ header {
     align-items: center;
     justify-content: flex-end;
     border: 1px dashed green;
-}
-
-.instructions {
-    height: 100px;
-    width: 90%;
-    color: white;
-    text-align: center;
-    padding: 5px;
-    border: 1px solid brown;
-    margin: 20px auto;
 }
 
 .block {
@@ -75,4 +66,9 @@ header {
 
 .block5 {
     width: 250px;
+}
+
+footer {
+    color: blue;
+    text-align: right;
 }
