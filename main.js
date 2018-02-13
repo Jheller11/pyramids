@@ -40,15 +40,17 @@ class Column {
   }
   deletedivs () {
     while (this.element.firstChild) {
-    this.element.removeChild()
+      this.element.removeChild()
+    }
   }
-  }
-  addListener () {
-    this.element.addEventListener('click', function () {
-      console.log('listeners added')
-      fromColumn = this.name
-      activeBlock = this.array[0]
-      return this.name
+  listeners () {
+    this.element.addEventListener('click', () => {
+      if (!activeBlock) {
+        activeBlock = this.array[0]
+        fromColumn = this.name
+      } else {
+        toColumn = this.name
+      }
     })
   }
 }
@@ -65,12 +67,14 @@ const game = {
       return true
     }
   },
-  moveBlock () {
-    for ( i = 0; i < game.columnsArray.length; i++) {
-      game.columnsArray[i].addListener()
+  addListeners () {
+    for (let i = 0; i < game.columnsArray.length; i++) {
+      game.columnsArray[i].listeners()
     }
+  },
+  executeMove () {
+    
   }
 }
 
 column1.updateColumn()
-game.moveBlock()
