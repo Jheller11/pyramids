@@ -8,9 +8,13 @@ body {
 }
 
 header {
-    padding: 20px;
     text-align: center;
-    color: white
+    color: white;
+}
+
+h1 {
+    font-family: 'Sacramento', cursive;
+    font-size: 250%;
 }
 
 .counter {
@@ -23,7 +27,7 @@ header {
     display: flex;
     justify-content: center;
     width: 95%;
-    margin: 20px auto;
+    margin: 0 auto;
     padding: 5px;  
 }
 .column {
@@ -38,7 +42,7 @@ header {
 }
 
 .block {
-    height: 18%;
+    height: 70px;
     background-color: rgb(204,163,0);
     border: 1px solid black;
     background-image: url("images/dark-brick-wall.png");

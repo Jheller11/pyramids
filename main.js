@@ -60,7 +60,6 @@ class Column {
 const column1 = new Column('one', column1div, [])
 const column2 = new Column('two', column2div, [])
 const column3 = new Column('three', column3div, [])
-column1.array = [block1, block2, block3, block4, block5]
 
 const game = {
   columnsArray: [column1, column2, column3],
@@ -106,6 +105,6 @@ const game = {
     }
   }
 }
-
+column1.array = [block1, block2, block3, block4, block5]
 column1.updateColumn()
 game.addListeners()
