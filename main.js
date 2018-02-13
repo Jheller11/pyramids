@@ -8,7 +8,7 @@ class Block {
 var activeBlock
 var toColumn
 var fromColumn
-var totalMoves = -1
+var totalMoves = 0
 const counter = document.querySelector('.counter')
 const column1div = document.querySelector('#columnone')
 const column2div = document.querySelector('#columntwo')
@@ -26,12 +26,13 @@ class Column {
     this.array = []
   }
   addBlock (activeBlock) {
-    this.array.push(activeBlock)
+    this.array.unshift(activeBlock)
   }
   removeBlock () {
     this.array.splice(0, 1)
   }
   updateColumn () {
+    this.deletedivs()
     for (let i = 0; i < this.array.length; i++) {
       var newBlock = document.createElement('div')
       this.element.appendChild(newBlock)
@@ -40,16 +41,17 @@ class Column {
   }
   deletedivs () {
     while (this.element.firstChild) {
-      this.element.removeChild()
+      this.element.removeChild(this.element.firstChild)
     }
   }
   listeners () {
     this.element.addEventListener('click', () => {
       if (!activeBlock) {
         activeBlock = this.array[0]
-        fromColumn = this.name
+        fromColumn = this
       } else {
-        toColumn = this.name
+        toColumn = this
+        game.executeMove()
       }
     })
   }
@@ -64,7 +66,7 @@ const game = {
   columnsArray: [column1, column2, column3],
   checkWin () {
     if (column3div.childNodes.length === 5) {
-      return true
+      alert('You won')
     }
   },
   addListeners () {
@@ -73,8 +75,37 @@ const game = {
     }
   },
   executeMove () {
-    
+    if (game.checkValid()) {
+      toColumn.addBlock(activeBlock)
+      fromColumn.removeBlock()
+      game.updateColumns()
+      game.checkWin()
+      totalMoves += 1
+      counter.innerHTML = 'Total Moves: ' + totalMoves
+      activeBlock = undefined
+    } else {
+      alert('invalid move')
+      toColumn = undefined
+      activeBlock = undefined
+    }
+  },
+  updateColumns () {
+    for (let i = 0; i < game.columnsArray.length; i++) {
+      game.columnsArray[i].updateColumn()
+    }
+  },
+  checkValid () {
+    if (toColumn.array[0]) {
+      if (activeBlock.size <= toColumn.array[0].size) {
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return true
+    }
   }
 }
 
 column1.updateColumn()
+game.addListeners()
