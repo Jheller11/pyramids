@@ -4,21 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Welcome to Pyramids!</title>
+    <title>Pyramids!</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
 </head>
 <body>
-        <header>
-            <h1>Move the Pyramid!</h1>
-        </header>
-    <div class="instructions">
-        <p>How to Play: <br>1. Select the top block from any column by clicking on that column. <br>2. Select a column to place the block in.</p>
-        <p>To win, move blocks from the first column to the last column given the following rules:<br>
-            1. You may only move one block at a time.<br> 2. You may not place a larger block on top of a smaller block.</p>
-    </div>
-    <div class="topScore">Best Score: Jeff - Total Moves: 31</div>
-    <a href="game.html" class="block"> <br>START GAME!</a>
+    <header>
+        <h1>Move the Pyramid!</h1>
+        <div class="topScore">Best Score: Jeff - Total Moves: 31</div>
+        <div class="counter">Total Moves: 0</div>
+    </header>
+    <main>
+        <div class="gamecontainer">
+            <div class="column" id="columnone"></div>
+            <div class="column" id="columntwo"></div>
+            <div class="column" id="columnthree"></div>            
+        </div>
+
+    </main>
+    <footer>
+        <h3>Created by Jeff Heller</h3>
+    </footer>
+
     
+    <script src="main.js"></script>
 </body>
 </html>
