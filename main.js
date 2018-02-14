@@ -25,23 +25,14 @@ class Column {
     this.element = element
     this.array = []
   }
-  addBlock (activeBlock) {
-    this.array.unshift(activeBlock)
-  }
-  removeBlock () {
-    this.array.splice(0, 1)
-  }
   updateColumn () {
-    this.deletedivs()
+    while (this.element.firstChild) {
+      this.element.removeChild(this.element.firstChild)
+    }
     for (let i = 0; i < this.array.length; i++) {
       var newBlock = document.createElement('div')
       this.element.appendChild(newBlock)
       newBlock.classList = ('block ' + this.array[i].name)
-    }
-  }
-  deletedivs () {
-    while (this.element.firstChild) {
-      this.element.removeChild(this.element.firstChild)
     }
   }
   listeners () {
@@ -75,8 +66,8 @@ const game = {
   },
   executeMove () {
     if (game.checkValid()) {
-      toColumn.addBlock(activeBlock)
-      fromColumn.removeBlock()
+      toColumn.array.unshift(activeBlock)
+      fromColumn.array.splice(0, 1)
       game.updateColumns()
       game.checkWin()
       totalMoves += 1
