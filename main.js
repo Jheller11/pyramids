@@ -39,6 +39,7 @@ class Column {
     this.element.addEventListener('click', () => {
       if (!activeBlock) {
         activeBlock = this.array[0]
+        this.element.firstChild.setAttribute('id', 'active')
         fromColumn = this
       } else {
         toColumn = this
@@ -75,6 +76,7 @@ const game = {
       activeBlock = undefined
     } else {
       alert('invalid move')
+      fromColumn.element.firstChild.setAttribute('id', '')
       toColumn = undefined
       activeBlock = undefined
     }
