@@ -17,5 +17,6 @@ The contents of each column are controlled in the array property.  At the start 
 # Additional Features to Add
 - Timer
 - Best Times Leaderboard
+- Custom Difficulty Lever (User selects number of blocks)
 
 
