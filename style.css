@@ -28,6 +28,10 @@ a:hover {
     background-color: lime;
 }
 
+.restart {
+    margin: 10px auto;
+}
+
 button {
     margin: auto 20px;
     width: 100px;
@@ -51,7 +55,7 @@ h1 {
 .counter {
     height: 50px;
     width: 100px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .gamecontainer {
