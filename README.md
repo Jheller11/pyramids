@@ -1,16 +1,21 @@
+This project was completed during the Web Development Immersive at General Assembly.  Please read below for project description.
 
+# Description
 
+The game is inspired by Towers of Hanoi, a mathematical puzzle game wherein a play moves disks or rings from one vertical rod to another.  The rules the game allow a player to only move one disk at a time.  Additionally a player can not place a larger disk on top of a smaller disk.
 
-final checklist:
-- hosted on github pages
+In my Pyramids game, the concept is identical except the user is moving "levels" of the pyramid.  Only one may be moved at a time, and no larger level can be places on a smaller level.  The game guides users through gameplay with a simple set of instructions just above the playing area.  Additionally, the levels of the pyramid will change color to green when the player has selected the block to move, and to red if the move the player chose is not valid.  Additionally, a set of instructions is available on the landing page which players can read before starting a new game.
 
-Game Design:
+# Technologies Used
 
-The game is designed based on classes for the "blocks" and "columns".  There are three instances of "Column" and five instances of "Block".  Additionally, there is a "Game" object which controls most of the functionality of the game and calls the methods of the columns objects.  
+The game is composed of HTML, CSS, and Javascript.  The files can be found in this repository.  The Javascript is responsible for manipulating the DOM elements and "moving" blocks or levels of the pyramid between the three areas where they may be placed.  
 
-Each column object contains an array of blocks which are presently stacked in that column.  At the creation of the game, the blocks are all added to the array of column 1, the left side column.  Each column is given an event listener which will return the column object as variables "toColumn" or "fromColumn".  If there is no "fromColumn", the selected column will become the "fromColumn" and the 1st item of that column's array is set as the "activeBlock", or block to be moved.  Once a "fromColumn" is established, the user can select a "toColumn".  Next, the game.executeMove() function will remove the "activeBlock" from the array of the "fromColumn" and insert it at index 0 of the "toColumn"'s array.  Following that change, the "fromColumn", "toColumn", and "activeBlock" variables are all reset to undefined.  Additionally, at this time, the move is checked for validity(to ensure that no larger block is placed on top of a smaller block), and the win condition is checked(whether or not column 3, or the right side column, includes all five blocks).  If the win condition is satisfied, the user is alerted.
+## Javascript Explanation
 
-The user's view is completely rebuilt after each move based on the new contents of each column's array.  First, all divs that were created to represent the blocks are deleted.  Then, each column loops through its own array creating and appending new divs to represent its contained blocks.  The block class is defined as "block" + the block.name, which allows for correct sizing based on specific class.  
+The contents of each column are controlled in the array property.  At the start of the game, and after each move, the pyramid levels are deleted from the user view and then recreated based on the new arrays for each column.
 
+# Additional Features to Add
+- Timer
+- Best Times Leaderboard
 
 
