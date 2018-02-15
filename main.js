@@ -4,7 +4,7 @@ class Block {
     this.size = size
   }
 }
-
+var winValue
 var activeBlock
 var toColumn
 var fromColumn
@@ -13,6 +13,12 @@ const counter = document.querySelector('.counter')
 const column1div = document.querySelector('#columnone')
 const column2div = document.querySelector('#columntwo')
 const column3div = document.querySelector('#columnthree')
+const instruction = document.querySelector('.instruction')
+const invalidMove = "You can't put that block there.  Please try again!"
+const selectBlock = "Please select a block to move by clicking on it's present column..."
+const move = 'Now select a column to move the block to...'
+const easy = document.querySelector('.easy')
+const hard = document.querySelector('.hard')
 const block1 = new Block('block1', 1)
 const block2 = new Block('block2', 2)
 const block3 = new Block('block3', 3)
@@ -40,6 +46,7 @@ class Column {
       if (!activeBlock) {
         activeBlock = this.array[0]
         this.element.firstChild.setAttribute('id', 'active')
+        instruction.innerText = move
         fromColumn = this
       } else {
         toColumn = this
@@ -55,9 +62,24 @@ const column3 = new Column('three', column3div, [])
 
 const game = {
   columnsArray: [column1, column2, column3],
+  createGame () {
+    totalMoves = 0
+    document.querySelector('.gametype').innerHTML = ''
+    instruction.innerText = selectBlock
+    if (winValue === 5) {
+      column1.array = [block1, block2, block3, block4, block5]
+      column1.updateColumn()
+      game.addListeners()
+    } else if (winValue === 3) {
+      column1.array = [block1, block3, block5]
+      column1.updateColumn()
+      game.addListeners()
+    }
+  },
   checkWin () {
-    if (column3div.childNodes.length === 5) {
-      alert('You won')
+    if (column3div.childNodes.length === winValue) {
+      alert('Congratulations! You won the game!')
+      document.querySelector('.gametype').innerHTML = '<a href="game.html" class="block"> <br>START NEW GAME!</a>'
     }
   },
   addListeners () {
@@ -70,13 +92,15 @@ const game = {
       toColumn.array.unshift(activeBlock)
       fromColumn.array.splice(0, 1)
       game.updateColumns()
-      game.checkWin()
       totalMoves += 1
-      counter.innerHTML = 'Total Moves: ' + totalMoves
-      activeBlock = undefined
+      counter.innerHTML = 'Blocks Moved: ' + totalMoves
+      if (!game.checkWin()) {
+        instruction.innerText = selectBlock
+        activeBlock = undefined
+      }
     } else {
-      alert('invalid move')
-      fromColumn.element.firstChild.setAttribute('id', '')
+      fromColumn.element.firstChild.setAttribute('id', 'invalid')
+      instruction.innerText = invalidMove
       toColumn = undefined
       activeBlock = undefined
     }
@@ -98,6 +122,12 @@ const game = {
     }
   }
 }
-column1.array = [block1, block2, block3, block4, block5]
-column1.updateColumn()
-game.addListeners()
+
+easy.addEventListener('click', () => {
+  winValue = 3
+  game.createGame()
+})
+hard.addEventListener('click', () => {
+  winValue = 5
+  game.createGame()
+})
