@@ -12,7 +12,7 @@ The game is composed of HTML, CSS, and Javascript.  The files can be found in th
 
 ## Javascript Explanation
 
-The contents of each column are controlled in the array property.  At the start of the game, and after each move, the pyramid levels are deleted from the user view and then recreated based on the new arrays for each column.
+The contents of a columns array always dictate what will be displayed to the user. During each "move" the column the use first selects is stored as the "fromColumn".  Additionally, the first item in the array for the "fromColumn" is stored as the "activeBlock" and the first child of the "fromColumn" in the user view will have an ID "active" added to change the color.  Next, the user will select a "toColumn", or column that the activeBlock should be moved to.  The checkValid function will confirm that the user is not trying to make an illegal move based on the block sizes.  If the move is valid, the "activeBlock" is removed from the "fromColumn" array and added to the "toColumn" array. Then,after each move, the pyramid levels are deleted from the user view and then recreated based on the blocks present in the arrays for each column. This is done in the updateColumns (under game object) and updateColumn (method under Column class) functions.
 
 # Additional Features to Add
 - Timer
