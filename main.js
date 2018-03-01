@@ -20,6 +20,7 @@ const instruction = document.querySelector('.instruction')
 const invalidMove = "You can't put that block there.  Please try again!"
 const selectBlock = "Please select a block to move by clicking on it's present column..."
 const move = 'Now select a column to move the block to...'
+// Very cool how you update the instructions to guide the user along. Maybe change these names to be more like `moveInstruction`
 const easy = document.querySelector('.easy')
 const hard = document.querySelector('.hard')
 // creates five new instances of Block class.  Hard Move = all five blocks, Easy Mode = blocks 1, 3, and 5
@@ -39,7 +40,7 @@ class Column {
   }
   // After each move the contents of each column div are removed.
   // The loop then evaluates what blocks are in this column's array and adds them to user view.
-  updateColumn () {
+  updateColumn () { // Great way to update the columns to keep your data separate from your views
     while (this.element.firstChild) {
       this.element.removeChild(this.element.firstChild)
     }
@@ -52,7 +53,7 @@ class Column {
   // The user will click first on a column to select the top block to move.
   // If block to move has already been selected,
   // then this will allow to user to select a column to move the block to.
-  listeners () {
+  listeners () { // Solid method - does a lot with just a few lines
     this.element.addEventListener('click', () => {
       if (!activeBlock) {
         activeBlock = this.array[0]
@@ -88,12 +89,12 @@ const game = {
     } else if (winValue === 3) {
       column1.array = [block1, block3, block5]
       column1.updateColumn()
-      game.addListeners()
+      game.addListeners() // You could move these two methods out of the if-else statement since they are applying to both cases either way
     }
   },
   checkWin () {
     if (column3div.childNodes.length === winValue) {
-      alert('Congratulations! You won the game!')
+      alert('Congratulations! You won the game!') // Better user experience would be to update the page in some way instead of an alert
       document.querySelector('.gametype').innerHTML = '<a href="game.html" class="block"> <br>START NEW GAME!</a>'
     }
   },
@@ -111,10 +112,12 @@ const game = {
       counter.innerHTML = 'Blocks Moved: ' + totalMoves
       if (!game.checkWin()) {
         instruction.innerText = selectBlock
-        activeBlock = undefined
+        activeBlock = undefined // This should be set to null.  Null implies intentionally no value, undefined implies var is declared but does not yet have a value
       }
     } else {
       fromColumn.element.firstChild.setAttribute('id', 'invalid')
+      // Small user interface issue here where the redness doesnt disappear until a user makes a valid move. This also means that you can end up with two red blocks on the screen which is a little confusing
+      // Maybe each time a click is made you could take off the invalid class?
       instruction.innerText = invalidMove
       toColumn = undefined
       activeBlock = undefined
@@ -146,3 +149,12 @@ hard.addEventListener('click', () => {
   winValue = 5
   game.createGame()
 })
+
+// Great job on the javascript!
+// You have a lot of really smart, efficient ways of manipulating the dom and keeping track of your data without too many lines of code.
+// There is not a lot of DRYing that can really be done here, only one or two spots at the most.
+// I like your comments a lot, though I would make them a little more concise.
+// Your approach to OOP worked really well for this project
+// Great job on the dom manipulation
+// You kept your data separate from the views and didnt rely off reading from the dom
+// Really excellent job!

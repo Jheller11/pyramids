@@ -10,7 +10,7 @@ body {
     animation: fadein 1.5s;
 }
 
-@keyframes fadein {
+@keyframes fadein { /* Cool! */
     from {opacity: 0; color: rgb(49, 214, 255); }
     to {opacity: 1; color: white; }
 }
@@ -70,14 +70,14 @@ h1 {
     width: 250px;
     height: 100%;
     margin: auto;
-    display: flex;
+    display: flex; /* Good use of flex */
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
     border: 1px dashed green;
 }
 
-.block {
+.block { /* Good use of a shared class to keep css DRY */
     height: 70px;
     background-color: rgb(204,163,0);
     border: 1px solid black;
@@ -116,3 +116,8 @@ footer {
 .gametype {
     display: inline-block
 }
+
+/* Typically with css, you want to target your elements first, then classes, then ids */
+/* Great job on the CSS! */
+/* You have good classnames and made good use of flex */
+/* One big thing to add would be the use of media-queries to make things render better for smaller page sizes */

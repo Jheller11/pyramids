@@ -13,8 +13,8 @@
         <div class="counter"> Blocks Moved: 0</div>
     </header>
     <main>
-        <div class="gametype">
-            <span>Select Level:</span>
+        <div class="gametype"> <!-- typically casing for html is `kebab-case` => `game-type` -->
+            <span>Select Level:</span> <!-- spans are generally used for parts of text, like making one word in a `p` tag green or something, not really for their own text -->
             <button class="easy block">Easy</button>
             <button class="hard block">Hard</button>
         </div>
@@ -25,13 +25,15 @@
             <div class="column" id="columnthree"></div>            
         </div>
         <a href="game.html" class="block restart"> <br>RESTART GAME!</a>
-        <div class="topScore">Best Score:<br>Hard: Jeff - Total Moves: 31<br>Easy: Jeff - Total Moves: 7</div>
+        <div class="topScore">Best Score:<br>Hard: Jeff - Total Moves: 31<br>Easy: Jeff - Total Moves: 7</div> <!-- Too many line breaks - use `p` tags! -->
     </main>
     <footer>
         <h3>Created by Jeff Heller</h3>
     </footer>
 
-    
     <script src="main.js"></script>
 </body>
 </html>
+
+<!-- Good html overall -->
+<!-- I like the semantic use of the different sections (main, header, footer) -->
