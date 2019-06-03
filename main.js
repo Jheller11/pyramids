@@ -1,24 +1,25 @@
 // class Block defined to give attributes to blocks in game.
 // Name is used to apply correct css class.  Size is used to check if a block move is valid
 class Block {
-  constructor (name, size) {
+  constructor(name, size) {
     this.name = name
     this.size = size
   }
 }
 // Variables to be used later in code.
-var winValue
-var activeBlock
-var toColumn
-var fromColumn
-var totalMoves = 0
+let winValue
+let activeBlock
+let toColumn
+let fromColumn
+let totalMoves = 0
 const counter = document.querySelector('.counter')
 const column1div = document.querySelector('#columnone')
 const column2div = document.querySelector('#columntwo')
 const column3div = document.querySelector('#columnthree')
 const instruction = document.querySelector('.instruction')
 const invalidMove = "You can't put that block there.  Please try again!"
-const selectBlock = "Please select a block to move by clicking on it's present column..."
+const selectBlock =
+  "Please select a block to move by clicking on it's present column..."
 const move = 'Now select a column to move the block to...'
 const easy = document.querySelector('.easy')
 const hard = document.querySelector('.hard')
@@ -32,27 +33,27 @@ const block5 = new Block('block5', 5)
 // Element is the variable that identified the column seen by the user.
 // Array contains the individual block objects that are currently found in that column.
 class Column {
-  constructor (name, element, array) {
+  constructor(name, element, array) {
     this.name = name
     this.element = element
     this.array = []
   }
   // After each move the contents of each column div are removed.
   // The loop then evaluates what blocks are in this column's array and adds them to user view.
-  updateColumn () {
+  updateColumn() {
     while (this.element.firstChild) {
       this.element.removeChild(this.element.firstChild)
     }
     for (let i = 0; i < this.array.length; i++) {
       var newBlock = document.createElement('div')
       this.element.appendChild(newBlock)
-      newBlock.classList = ('block ' + this.array[i].name)
+      newBlock.classList = 'block ' + this.array[i].name
     }
   }
   // The user will click first on a column to select the top block to move.
   // If block to move has already been selected,
   // then this will allow to user to select a column to move the block to.
-  listeners () {
+  listeners() {
     this.element.addEventListener('click', () => {
       if (!activeBlock) {
         activeBlock = this.array[0]
@@ -77,7 +78,7 @@ const column3 = new Column('three', column3div, [])
 // at the beginning of the array.
 const game = {
   columnsArray: [column1, column2, column3],
-  createGame () {
+  createGame() {
     totalMoves = 0
     document.querySelector('.gametype').innerHTML = ''
     instruction.innerText = selectBlock
@@ -91,18 +92,19 @@ const game = {
       game.addListeners()
     }
   },
-  checkWin () {
+  checkWin() {
     if (column3div.childNodes.length === winValue) {
       alert('Congratulations! You won the game!')
-      document.querySelector('.gametype').innerHTML = '<a href="game.html" class="block"> <br>START NEW GAME!</a>'
+      document.querySelector('.gametype').innerHTML =
+        '<a href="game.html" class="block"> <br>START NEW GAME!</a>'
     }
   },
-  addListeners () {
+  addListeners() {
     for (let i = 0; i < game.columnsArray.length; i++) {
       game.columnsArray[i].listeners()
     }
   },
-  executeMove () {
+  executeMove() {
     if (game.checkValid()) {
       toColumn.array.unshift(activeBlock)
       fromColumn.array.splice(0, 1)
@@ -120,12 +122,12 @@ const game = {
       activeBlock = undefined
     }
   },
-  updateColumns () {
+  updateColumns() {
     for (let i = 0; i < game.columnsArray.length; i++) {
       game.columnsArray[i].updateColumn()
     }
   },
-  checkValid () {
+  checkValid() {
     if (toColumn.array[0]) {
       if (activeBlock.size <= toColumn.array[0].size) {
         return true
@@ -146,3 +148,10 @@ hard.addEventListener('click', () => {
   winValue = 5
   game.createGame()
 })
+
+// track hits
+fetch('https://jh-node-proxy.herokuapp.com/pages/pyramids')
+  .then(response => {
+    console.log('ok')
+  })
+  .catch(err => console.log('err'))
